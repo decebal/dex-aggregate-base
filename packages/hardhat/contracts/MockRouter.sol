@@ -21,4 +21,15 @@ contract MockRouter {
             amounts[i] = amountIn * (i + 1); // Arbitrary mock output
         }
     }
+
+    function quoteExactInputSingle(
+        address tokenIn,
+        address tokenOut,
+        uint24 fee,
+        uint256 amountIn,
+        uint160 sqrtPriceLimitX96
+    ) external pure returns (uint256 amountOut) {
+        // Return a mock output that’s proportional to amountIn, for testing
+        amountOut = amountIn * 2; // Arbitrary multiplier for mock output
+    }
 }

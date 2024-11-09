@@ -92,7 +92,7 @@ describe("DexAggregator", function () {
         dexAggregator
           .connect(addr1)
           .swapTokens(amountIn as any, amountOutMin as any, path as any, addr1.address as any, deadline as any),
-      ).to.be.revertedWith("Pausable: paused");
+      ).to.be.revertedWithCustomError(dexAggregator, "EnforcedPause");
     });
   });
 });

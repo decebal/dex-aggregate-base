@@ -13,7 +13,7 @@ interface IAerodromeRouter {
     function swapExactTokensForTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts);
 }
 
-contract DexAggregator is Pausable, AccessControl {
+contract ClamAggregator is Pausable, AccessControl {
     using SafeERC20 for IERC20;
 
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");

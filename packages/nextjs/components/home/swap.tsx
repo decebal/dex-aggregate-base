@@ -1,20 +1,48 @@
+// TODO
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useCallback, useState } from "react";
 import { ArrowDownUp } from "lucide-react";
+import SwapButton from "~~/components/home/SwapButton";
 import { Button } from "~~/components/ui/button";
 import { Input } from "~~/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~~/components/ui/select";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 const Swap = () => {
-  const [amount1, setAmount1] = useState("");
-  const [amount2, setAmount2] = useState("");
+  const [firstAmount, setFirstAmount] = useState(0);
+  const [secondAmount, setSecondAmount] = useState(0);
+  const [firstTokenBalance, setFirstTokenBalance] = useState(0);
+  const [secondTokenBalance, setSecondTokenBalance] = useState(0);
+
   const availableCurrencies = {
     cbeth: "cbETH",
     usdc: "USDC",
   };
   const [firstCurrencySwap, setFirstCurrencySwap] = useState(availableCurrencies.cbeth);
   const [secondCurrencySwap, setSecondCurrencySwap] = useState(availableCurrencies.usdc);
+
+  const amountIn = "1000000000000000000"; // 1 token (assuming 18 decimals)
+  const path = ["0xTokenAAddress", "0xTokenBAddress"];
+
+  const { data: getBestPriceData, isMining: getBestPriceLoading } = useScaffoldWriteContract("ClamAggregator", {
+    functionName: "getBestPrice",
+    args: [amountIn, path],
+  });
+  // console.log({getBestPriceData, })
+
+  const handleChangeFirstAmount = useCallback(() => {
+    if (!getBestPriceLoading) {
+      console.log({ getBestPriceData });
+    }
+  }, [getBestPriceData, getBestPriceLoading]);
+
+  const handleChangeSecondAmount = useCallback(() => {
+    if (!getBestPriceLoading) {
+      console.log({ getBestPriceData });
+    }
+  }, [getBestPriceData, getBestPriceLoading]);
 
   const handleQuickSwitch = useCallback(() => {
     setFirstCurrencySwap(secondCurrencySwap);
@@ -56,14 +84,16 @@ const Swap = () => {
         <div className="relative z-10">
           <div className="flex justify-between mb-2">
             <span className="text-sm text-gray-600">You pay</span>
-            <span className="text-sm text-gray-600">Balance: 0 {firstCurrencySwap}</span>
+            <span className="text-sm text-gray-600">
+              Balance: {firstTokenBalance} {firstCurrencySwap}
+            </span>
           </div>
           <div className="flex items-center">
             <Input
               type="number"
               placeholder="0"
-              value={amount1}
-              onChange={e => setAmount1(e.target.value)}
+              value={firstAmount}
+              onChange={e => handleChangeFirstAmount(e.target.value)}
               className="text-2xl font-semibold bg-transparent border-none focus:outline-none focus:ring-0"
             />
             <Select onValueChange={handleFirstSwitch}>
@@ -98,14 +128,16 @@ const Swap = () => {
         <div className="relative z-10">
           <div className="flex justify-between mb-2">
             <span className="text-sm text-gray-600">You receive</span>
-            <span className="text-sm text-gray-600">Balance: 0 {secondCurrencySwap}</span>
+            <span className="text-sm text-gray-600">
+              Balance: {secondTokenBalance} {secondCurrencySwap}
+            </span>
           </div>
           <div className="flex items-center">
             <Input
               type="number"
               placeholder="0"
-              value={amount2}
-              onChange={e => setAmount2(e.target.value)}
+              value={secondAmount}
+              onChange={e => handleChangeSecondAmount(e.target.value)}
               className="text-2xl font-semibold bg-transparent border-none focus:outline-none focus:ring-0"
             />
             <Select onValueChange={handleSecondSwitch}>
@@ -124,9 +156,7 @@ const Swap = () => {
         </div>
       </div>
 
-      <Button className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-semibold py-4 rounded-2xl transition-all duration-300 transform hover:scale-[1.02]">
-        Connect Wallet
-      </Button>
+      <SwapButton />
     </div>
   );
 };

@@ -41,7 +41,7 @@ export const useDeployedContractInfo = <TContractName extends ContractName>(cont
       }
     };
 
-    checkContractDeployment();
+    void checkContractDeployment();
   }, [isMounted, contractName, deployedContract, publicClient]);
 
   return {

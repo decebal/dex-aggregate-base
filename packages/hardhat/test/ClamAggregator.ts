@@ -1,10 +1,10 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { DexAggregator, MockRouter, MockToken } from "../typechain-types";
+import { ClamAggregator, MockRouter, MockToken } from "../typechain-types";
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 
-describe("DexAggregator", function () {
-  let dexAggregator: DexAggregator;
+describe("ClamAggregator", function () {
+  let clamAggregator: ClamAggregator;
   let mockUniswap: MockRouter;
   let mockAerodrome: MockRouter;
   let tokenA: MockToken;
@@ -22,14 +22,14 @@ describe("DexAggregator", function () {
     mockAerodrome = (await MockRouterFactory.deploy()) as MockRouter;
     await mockAerodrome.waitForDeployment();
 
-    // Deploy DexAggregator with mock routers
-    const DexAggregatorFactory = await ethers.getContractFactory("DexAggregator");
-    dexAggregator = (await DexAggregatorFactory.deploy(
+    // Deploy ClamAggregator with mock routers
+    const ClamAggregatorFactory = await ethers.getContractFactory("ClamAggregator");
+    clamAggregator = (await ClamAggregatorFactory.deploy(
       mockUniswap.target,
       mockAerodrome.target,
       mockUniswap.target,
-    )) as DexAggregator;
-    await dexAggregator.waitForDeployment();
+    )) as ClamAggregator;
+    await clamAggregator.waitForDeployment();
 
     // Deploy mock tokens
     const MockTokenFactory = await ethers.getContractFactory("MockToken");
@@ -42,13 +42,13 @@ describe("DexAggregator", function () {
 
   describe("Access Control", function () {
     it("should assign DEFAULT_ADMIN_ROLE to the owner", async function () {
-      const adminRole = await dexAggregator.DEFAULT_ADMIN_ROLE();
-      expect(await dexAggregator.hasRole(adminRole as any, owner.address as any)).to.be.true;
+      const adminRole = await clamAggregator.DEFAULT_ADMIN_ROLE();
+      expect(await clamAggregator.hasRole(adminRole as any, owner.address as any)).to.be.true;
     });
 
     it("should assign PAUSER_ROLE to the owner", async function () {
-      const pauserRole = await dexAggregator.PAUSER_ROLE();
-      expect(await dexAggregator.hasRole(pauserRole as any, owner.address as any)).to.be.true;
+      const pauserRole = await clamAggregator.PAUSER_ROLE();
+      expect(await clamAggregator.hasRole(pauserRole as any, owner.address as any)).to.be.true;
     });
   });
 
@@ -58,30 +58,30 @@ describe("DexAggregator", function () {
       const amountOutMin = ethers.parseEther("0.9");
 
       await tokenA.mint(addr1.address as any, amountIn as any);
-      await tokenA.connect(addr1).approve(dexAggregator.target as any, amountIn as any);
+      await tokenA.connect(addr1).approve(clamAggregator.target as any, amountIn as any);
 
       const path = [tokenA.target, tokenB.target];
       const deadline = Math.floor(Date.now() / 1000) + 60 * 20;
 
       await expect(
-        dexAggregator
+        clamAggregator
           .connect(addr1)
           .swapTokens(amountIn as any, amountOutMin as any, path as any, addr1.address as any, deadline as any),
-      ).to.emit(dexAggregator, "TokensSwapped");
+      ).to.emit(clamAggregator, "TokensSwapped");
     });
   });
 
   describe("Pausable", function () {
     it("should allow the owner to pause and unpause swaps", async function () {
-      await dexAggregator.connect(owner).pause();
-      expect(await dexAggregator.paused()).to.be.true;
+      await clamAggregator.connect(owner).pause();
+      expect(await clamAggregator.paused()).to.be.true;
 
-      await dexAggregator.connect(owner).unpause();
-      expect(await dexAggregator.paused()).to.be.false;
+      await clamAggregator.connect(owner).unpause();
+      expect(await clamAggregator.paused()).to.be.false;
     });
 
     it("should revert swap when paused", async function () {
-      await dexAggregator.connect(owner).pause();
+      await clamAggregator.connect(owner).pause();
 
       const amountIn = ethers.parseEther("1");
       const amountOutMin = ethers.parseEther("0.9");
@@ -89,10 +89,10 @@ describe("DexAggregator", function () {
       const deadline = Math.floor(Date.now() / 1000) + 60 * 20;
 
       await expect(
-        dexAggregator
+        clamAggregator
           .connect(addr1)
           .swapTokens(amountIn as any, amountOutMin as any, path as any, addr1.address as any, deadline as any),
-      ).to.be.revertedWithCustomError(dexAggregator, "EnforcedPause");
+      ).to.be.revertedWithCustomError(clamAggregator, "EnforcedPause");
     });
   });
 });

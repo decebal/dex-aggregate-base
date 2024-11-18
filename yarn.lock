@@ -1981,6 +1981,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-accordion@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@radix-ui/react-accordion@npm:1.2.1"
+  dependencies:
+    "@radix-ui/primitive": 1.1.0
+    "@radix-ui/react-collapsible": 1.1.1
+    "@radix-ui/react-collection": 1.1.0
+    "@radix-ui/react-compose-refs": 1.1.0
+    "@radix-ui/react-context": 1.1.1
+    "@radix-ui/react-direction": 1.1.0
+    "@radix-ui/react-id": 1.1.0
+    "@radix-ui/react-primitive": 2.0.0
+    "@radix-ui/react-use-controllable-state": 1.1.0
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 0f03714cf90d8cb0282dc22876c5dbc2fc271afb9313499457fcbd323275a79c7c243a5d067bbaeb3019c0379c061e623c5b6e7d3e46a16ca672fe442bc68a02
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-arrow@npm:1.1.0":
   version: 1.1.0
   resolution: "@radix-ui/react-arrow@npm:1.1.0"
@@ -1997,6 +2024,32 @@ __metadata:
     "@types/react-dom":
       optional: true
   checksum: 8522e0a8095ecc32d3a719f9c3bc0514c677a9c9d5ac26985d5416576dbc487c2a49ba2484397d9de502b54657856cb41ca3ea0b2165563eeeae45a83750885b
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-collapsible@npm:1.1.1":
+  version: 1.1.1
+  resolution: "@radix-ui/react-collapsible@npm:1.1.1"
+  dependencies:
+    "@radix-ui/primitive": 1.1.0
+    "@radix-ui/react-compose-refs": 1.1.0
+    "@radix-ui/react-context": 1.1.1
+    "@radix-ui/react-id": 1.1.0
+    "@radix-ui/react-presence": 1.1.1
+    "@radix-ui/react-primitive": 2.0.0
+    "@radix-ui/react-use-controllable-state": 1.1.0
+    "@radix-ui/react-use-layout-effect": 1.1.0
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 168f457eda95a25d37835db4bb782b2ea61f6c86cec82b772f363d6fc669079b0c80a60e9f81bfc9d50cb55d82bb039edf6144df5011017c0c9354c09389f1f8
   languageName: node
   linkType: hard
 
@@ -2296,6 +2349,25 @@ __metadata:
     "@types/react-dom":
       optional: true
   checksum: cd662a5f0b1cc77dd81df51997ddc1dd47cc0025551e4ffa0c2675c056b3609257096d4f4e27189ddac98771a0191d68323c97d61fa0991d6fae78e708650959
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-separator@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@radix-ui/react-separator@npm:1.1.0"
+  dependencies:
+    "@radix-ui/react-primitive": 2.0.0
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: a7c3445603a45075dcf3559eb8f2f2e8545afeae253e67d0bde736c66b293c601974a1d6f9d7be1802d83869933dc120a7389ab98189ceb9a24659737dde0162
   languageName: node
   linkType: hard
 
@@ -2709,7 +2781,9 @@ __metadata:
   resolution: "@se-2/nextjs@workspace:packages/nextjs"
   dependencies:
     "@heroicons/react": ^2.1.5
+    "@radix-ui/react-accordion": ^1.2.1
     "@radix-ui/react-select": ^2.1.2
+    "@radix-ui/react-separator": ^1.1.0
     "@radix-ui/react-tabs": ^1.1.1
     "@rainbow-me/rainbowkit": 2.1.6
     "@tanstack/react-query": ^5.28.6
@@ -2729,6 +2803,7 @@ __metadata:
     eslint-config-next: ^14.0.4
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
+    framer-motion: 11.11.17
     lucide-react: ^0.438.0
     next: ^14.2.11
     next-nprogress-bar: ^2.3.13
@@ -7917,6 +7992,26 @@ __metadata:
   version: 4.3.7
   resolution: "fraction.js@npm:4.3.7"
   checksum: e1553ae3f08e3ba0e8c06e43a3ab20b319966dfb7ddb96fd9b5d0ee11a66571af7f993229c88ebbb0d4a816eb813a24ed48207b140d442a8f76f33763b8d1f3f
+  languageName: node
+  linkType: hard
+
+"framer-motion@npm:11.11.17":
+  version: 11.11.17
+  resolution: "framer-motion@npm:11.11.17"
+  dependencies:
+    tslib: ^2.4.0
+  peerDependencies:
+    "@emotion/is-prop-valid": "*"
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  peerDependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 5d81b814938132e45472088e45a28d9187267817387729b89c048c1789bae5da9ed9a7a484d4e0ad7b5dfb1a39ebb8fade3cbcd55ded86b218195759a4417727
   languageName: node
   linkType: hard
 

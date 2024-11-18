@@ -21,6 +21,13 @@ export default function Component() {
               <span className="mx-2">|</span>
               <time dateTime="2024-11-17">Nov. 17, 2024</time>
             </div>
+            <Image
+              src="/images/blog/DEXAggregatorMechanics.png"
+              alt="Understanding Dex Aggregators"
+              width={600}
+              height={400}
+              className="mb-6 rounded-lg"
+            />
             <div className="prose max-w-none">
               <p className="text-lg leading-relaxed">
                 Decentralized finance (DeFi) has exploded into a sprawling ecosystem of protocols, liquidity pools, and

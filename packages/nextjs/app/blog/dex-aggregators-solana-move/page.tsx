@@ -22,6 +22,13 @@ export default function Component() {
               <span className="mx-2">|</span>
               <time dateTime="2024-11-17">Nov. 17, 2024</time>
             </div>
+            <Image
+              src="/images/blog/crosschain-aggregators.png"
+              alt="Crosschain Dex Aggregators"
+              width={600}
+              height={400}
+              className="mb-6 rounded-lg"
+            />
             <div className="prose max-w-none">
               <p className="text-lg leading-relaxed">
                 In the rapidly shifting landscape of decentralized finance, DEX aggregators are quietly orchestrating a
